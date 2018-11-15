@@ -24,12 +24,13 @@ class User extends CI_Model
         return $this->db->get(); 
     }
     
-    function search($no_pelanggan=null,$name=null,$id_pelanggan=null)
+    function search($no_pelanggan=null,$name=null,$id_pelanggan=null,$no_meter=null)
     {
         $this->db->select($this->field);
         $this->cek_null($no_pelanggan, 'No_Pelanggan');
         $this->cek_null($name, 'Nama_Pelanggan');
         $this->cek_null($id_pelanggan, 'ID_Pelanggan');
+        $this->cek_null($no_meter, 'No_Meter');
         $this->db->limit(25);
         $this->db->from($this->tableName); 
         return $this->db->get(); 

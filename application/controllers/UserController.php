@@ -26,7 +26,7 @@ class UserController extends CI_Controller {
     function search(){
        try{
            $datax = (array)json_decode(file_get_contents('php://input'));  
-           $result = $this->User->search($datax['no_pelanggan'],$datax['nama_pelanggan'],$datax['id_pelanggan']);
+           $result = $this->User->search($datax['no_pelanggan'],$datax['nama_pelanggan'],$datax['id_pelanggan'],$datax['no_meter']);
            if ($result->num_rows() > 0){ return $this->response($result->result()); }else{
             return $this->response(null,404);
            }    
