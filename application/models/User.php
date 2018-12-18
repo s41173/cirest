@@ -16,6 +16,16 @@ class User extends CI_Model
                              'Kd_Buku', 'Ket', 'Kd_Sampah', 'Kd_Saluran', 'ID_Pelanggan', 'Kondisi_M', 'Kolektif', 'letak'
                             );
     
+    protected $field_infoair = array('instalasi', 'nama', 'tarif', 'register', 'MtrAwal', 'MtrAkhir',
+                             'pakai', 'HargaAir', 'BiayaAdm', 'PerawatanMeter', 'Materai', 'Sampah', 'Jumlah',
+                             'TanggalCatat', 'Cetak', 'bulan', 'tahun', 'alamat', 'lunas', 
+                             'TanggalBayar', 'Kasir', 'Status_Pelanggan'
+                            );
+    
+    protected $field_infononair = array('instalasi', 'nama', 'register', 'bukti1', 'tagihan',
+                                        'lunas', 'bulan', 'tahun', 'tanggal'
+                            );
+    
     function get($limit=100)
     {
         $this->db->select($this->field);
@@ -64,6 +74,20 @@ class User extends CI_Model
                 'id' => $this->db->insert_id(), 'success' => true, 'message' => 'data berhasil diinput'
             ];
         }
+    }
+    
+    function infoair($instalasi=null){
+        $this->db->select($this->field_infoair);
+        $this->cek_null($instalasi, 'instalasi');
+        $this->db->from('infoair'); 
+        return $this->db->get(); 
+    }
+    
+    function infononair($instalasi=null){
+        $this->db->select($this->field_infononair);
+        $this->cek_null($instalasi, 'instalasi');
+        $this->db->from('infononair'); 
+        return $this->db->get(); 
     }
 
 }

@@ -60,5 +60,39 @@ class UserController extends CI_Controller {
         }
         
     }
+    
+    function times($param=null){
+        
+        $startTime = date("Y-m-d H:i:s");
+        $cenvertedTime = date('Y-m-d H:i:s',strtotime('-7 hour',strtotime($startTime)));
+
+        if (!$param){
+           return $this->response(array('gmt7' => $startTime, 'gmt' => lockcode_format($cenvertedTime))); 
+        }
+    }
+    
+    function infoair(){ 
+        try{
+           $datax = (array)json_decode(file_get_contents('php://input'));  
+           $result = $this->User->infoair($datax['instalasi']);
+           if ($result->num_rows() > 0){ return $this->response($result->result()); }else{
+            return $this->response(null,404);
+           }    
+        }catch(\Exception $e){
+            return $this->response(null,403);
+        }
+    }
+    
+    function infononair(){ 
+        try{
+           $datax = (array)json_decode(file_get_contents('php://input'));  
+           $result = $this->User->infononair($datax['instalasi']);
+           if ($result->num_rows() > 0){ return $this->response($result->result()); }else{
+            return $this->response(null,404);
+           }    
+        }catch(\Exception $e){
+            return $this->response(null,403);
+        }
+    }
 	
 }
