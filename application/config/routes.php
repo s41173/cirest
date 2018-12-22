@@ -54,6 +54,11 @@ $route['api/customers']['GET']          = 'UserController/get_all';
 $route['api/customers']['POST']          = 'UserController/search';
 $route['api/infoair']['POST'] = 'UserController/infoair';
 $route['api/infononair']['POST'] = 'UserController/infononair';
+$route['api/login']['POST'] = 'UserController/login';
+$route['api/otentikasi']['POST'] = 'UserController/otentikasi';
+$route['api/complain']['POST'] = 'UserController/complain';
+$route['api/get_complain']['POST'] = 'UserController/get_complain';
+
 //$route['api/customer/(:num)']['GET']    = 'UserController/get/$1';
 //$route['api/register']['POST']      = 'UserController/register';
 //$route['api/customer/(:num)']['PUT']    = 'UserController/update/$1';

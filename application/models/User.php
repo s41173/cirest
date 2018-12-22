@@ -79,6 +79,7 @@ class User extends CI_Model
     function infoair($instalasi=null){
         $this->db->select($this->field_infoair);
         $this->cek_null($instalasi, 'instalasi');
+        $this->db->order_by('TanggalCatat', 'desc');
         $this->db->from('infoair'); 
         return $this->db->get(); 
     }
@@ -86,6 +87,7 @@ class User extends CI_Model
     function infononair($instalasi=null){
         $this->db->select($this->field_infononair);
         $this->cek_null($instalasi, 'instalasi');
+        $this->db->order_by('tanggal', 'desc');
         $this->db->from('infononair'); 
         return $this->db->get(); 
     }
