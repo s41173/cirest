@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 class UserController extends CI_Controller {
 
@@ -7,7 +7,7 @@ class UserController extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('User');
-        $this->url = 'http://192.168.43.174/callcenteradmin/index.php/';
+        $this->url = 'http://api.delica.co.id/callcenteradmin/index.php/';
         
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
@@ -132,10 +132,10 @@ class UserController extends CI_Controller {
     }
     
     function login(){
-        
         try{
            $datax = (array)json_decode(file_get_contents('php://input')); 
            $nilai = '{ "custid":"'.$datax['custid'].'", "device":"'.$datax['device'].'" }';
+           $result = (array) json_decode($nilai, true);
            $url = $this->url.'api/login';
            $response = $this->request($url, $nilai, 'info');
            $result = (array) json_decode($response[0], true);
@@ -157,6 +157,19 @@ class UserController extends CI_Controller {
         }catch(\Exception $e){
             return $this->response(null,403);
         }
+    }
+    
+    function complain(){
+       try{
+           $datax = (array)json_decode(file_get_contents('php://input')); 
+           $nilai = '{ "custid":"'.$datax['custid'].'", "name":"'.$datax['name'].'", "phone":"'.$datax['phone'].'", "description":"'.$datax['description'].'" }';
+           $url = $this->url.'complain/add_json';
+           $response = $this->request($url, $nilai, 'info');
+           $result = (array) json_decode($response[0], true);
+           return $this->response($result,$response[1]); 
+        }catch(\Exception $e){
+            return $this->response(null,403);
+        } 
     }
     
     function get_complain(){
