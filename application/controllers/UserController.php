@@ -149,7 +149,7 @@ class UserController extends CI_Controller {
         
         try{
            $datax = (array)json_decode(file_get_contents('php://input')); 
-           $nilai = '{ "custid":"'.$datax['custid'].'", "log":"'.$datax['log'].'" }';
+           $nilai = '{ "custid":"'.$datax['custid'].'", "log":"'.$datax['log'].'", "device":"'.$datax['device'].'" }';
            $url = $this->url.'api/otentikasi';
            $response = $this->request($url, $nilai, 'info');
            $result = (array) json_decode($response[0], true);
